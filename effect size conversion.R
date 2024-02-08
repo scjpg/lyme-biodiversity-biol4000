@@ -8,35 +8,25 @@ esc_chisq(chisq = 6.19,
           totaln = 37,   # sample size of sites        
           es.type = "cox.or") # OR = 4.3892, SE = 0.5948
 
-esc_chisq(chisq = 6.19,
-          totaln = 37,   # sample size of sites        
-          es.type = "g") # g = 0.8771, SE = 0.3603
-
 
 # Prusinski et al. (2006)
 esc_rpb(r = -0.08,      
-        grp1n = 12,   # sample size of sites      
-        grp2n = 3163, # sample size of small mammals tested for infection
-        es.type = "cox.or") # OR = 0.1155, SE = 0.4782
-
-esc_rpb(r = -0.08,      
-        grp1n = 12,   # sample size of sites      
-        grp2n = 3163, # sample size of small mammals tested for infection
-        es.type = "g") # g = -1.3076, SE = 0.2897
+        grp1n = 12,   # sample size of sites for small mammals      
+        grp2n = 12, # sample size of sites for small mammals
+        es.type = "cox.or") # OR =  0.7673, SE = 0.6750
 
 
-# States et al. (2014)
-exp(0.04) # OR = 1.040811
+# States et al. (2014) *interaction coefficient* 
+exp(-0.7) # OR = 0.4965853
 
-convert_or2d(or = 1.040811,
-             se = 0.22,
-             totaln = 4,
-             es.type = "g") # g = 0.0126, SE = 0.1213
 
-# Werden et al. (2014)
-exp(-0.41) # OR = 0.6636503
+# Werden et al. (2014) *interaction coefficient* 
+exp(0.67) # OR = 1.954237
 
-convert_or2d(or = 0.6636503,
-             se = 0.13,
-             totaln = 12,
-             es.type = "g") # g =  -0.2087, SE = 0.0717
+# Allen et al. (2003)
+sqrt(0.43) # r = -0.6557439, negative because negative relationship
+
+esc_rpb(r = -0.6557439,      
+        grp1n = 14,   # sample size of sites for small mammals      
+        grp2n = 14, # sample size of sites for ticks
+        es.type = "cox.or") # OR = 0.0569, SE = 0.7322

@@ -36,7 +36,6 @@ View(data_Ginsberg)
 
 
 
-
 # logistic regression of tick infection prevalence ~ small mammal richness 
 
 # Millien et al. (2023)
@@ -45,10 +44,6 @@ summary(lr_Millien_rich) # beta = 0.2600, SE = 0.5449
 
 exp(0.26) # OR = 1.29693
 
-convert_or2d(or = 1.29693,
-             se = 0.5449,
-             totaln = 29,
-             es.type = "g") # g = 0.1393, SE = 0.3004
 
 # Ginsberg et al. (2021)
 lr_Ginsberg_rich <- glm(formula = prev_quest ~ spp_rich, family = "binomial", data = data_Ginsberg)
@@ -56,10 +51,6 @@ summary(lr_Ginsberg_rich) # beta = -0.2162, SE = 0.6566
 
 exp(-0.2162) # OR = 0.8055742
 
-convert_or2d(or = 0.8055742,
-             se = 0.6566,
-             totaln = 3,
-             es.type = "g") # g = 0, SE = 0.3620
 
 # logistic regression of tick infection prevalence ~ small mammal Shannon H
 
