@@ -3,11 +3,16 @@ library(esc)
 
 # EFFECT SIZE CONVERSIONS
 
-# LoGiudice et al. (2008) 
-esc_chisq(chisq = 6.19,
-          totaln = 37,   # sample size of sites        
-          es.type = "cox.or") # OR = 4.3892, SE = 0.5948
+# LoGiudice et al. (2008) *whole model chi-square, df = 1*
 
+esc_chisq(chisq = 9.37, # richness
+          totaln = 37,   # sample size of sites        
+          es.type = "cox.or") # OR = 6.8328, SE = 0.6281
+
+
+esc_chisq(chisq = 2.1, # shannon H
+          totaln = 37,   # sample size of sites        
+          es.type = "cox.or") # OR = 2.2468, SE = 0.5588
 
 # Prusinski et al. (2006)
 esc_rpb(r = -0.08,      
