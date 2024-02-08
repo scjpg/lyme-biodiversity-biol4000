@@ -1,6 +1,7 @@
 library(readxl)
 library(vegan)
 library(tidyverse)
+library(esc)
 
 # load data 
 data_Millien <- read_excel("~/school/BIOL4000/raw data/01_Millien_2023_data/01_Millien_2023_compiled.xlsx")
@@ -20,12 +21,8 @@ View(spp_matrix_Millien)
 spp_H_Millien <- diversity(spp_matrix_Millien)
 spp_H_Millien
 
-data_Millien <- cbind(data_Millien, spp_H = spp_H_Millien) # 0 length error 
-
-length(spp_matrix_Millien) # length 9? interesting...
-print(is.vector(spp_H_Millien)) # TRUE, so it IS a vector for sure
-
-
+data_Millien <- cbind(data_Millien, spp_H = spp_H_Millien)
+View(data_Millien)
 
 # logistic regression of tick infection prevalence ~ small mammal richness 
 
@@ -35,8 +32,18 @@ summary(lr_Millien_rich) # beta = 0.2600, SE = 0.5449
 
 exp(0.26) # OR = 1.29693
 
+convert_or2d(or = 1.29693,
+             se = 0.5449,
+             totaln = 29,
+             es.type = "g") # g = 0.1393, SE = 0.3004
+
 # Ginsberg et al. (2021)
 lr_Ginsberg_rich <- glm(formula = prev_quest ~ spp_rich, family = "binomial", data = data_Ginsberg)
 summary(lr_Ginsberg_rich) # beta = -0.2162, SE = 0.6566
 
 exp(-0.2162) # OR = 0.8055742
+
+convert_or2d(or = 0.8055742,
+             se = 0.6566,
+             totaln = 3,
+             es.type = "g") # g = 0, SE = 0.3620
