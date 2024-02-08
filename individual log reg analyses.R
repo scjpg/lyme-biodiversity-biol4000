@@ -24,6 +24,19 @@ spp_H_Millien
 data_Millien <- cbind(data_Millien, spp_H = spp_H_Millien)
 View(data_Millien)
 
+# Ginsberg et al. (2021)
+spp_matrix_Ginsberg <- select(data_Ginsberg, 7:18)
+View(spp_matrix_Ginsberg)
+
+spp_H_Ginsberg <- diversity(spp_matrix_Ginsberg)
+spp_H_Ginsberg
+
+data_Ginsberg <- cbind(data_Ginsberg, spp_H = spp_H_Ginsberg)
+View(data_Ginsberg)
+
+
+
+
 # logistic regression of tick infection prevalence ~ small mammal richness 
 
 # Millien et al. (2023)
@@ -47,3 +60,18 @@ convert_or2d(or = 0.8055742,
              se = 0.6566,
              totaln = 3,
              es.type = "g") # g = 0, SE = 0.3620
+
+# logistic regression of tick infection prevalence ~ small mammal Shannon H
+
+# Millien et al. (2023)
+lr_Millien_H <- glm(formula = prev_quest ~ spp_H, family = "binomial", data = data_Millien) 
+summary(lr_Millien_H) # beta = 1.530, SE = 2.221
+
+exp(1.530) # OR = 4.618177
+
+
+# Ginsberg et al. (2021)
+lr_Ginsberg_H <- glm(formula = prev_quest ~ spp_H, family = "binomial", data = data_Ginsberg)
+summary(lr_Ginsberg_H) # beta = -1.055, SE = 3.016
+
+exp(-1.055) # OR = 0.3481924
