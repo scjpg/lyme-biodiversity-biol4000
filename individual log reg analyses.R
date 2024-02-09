@@ -10,6 +10,8 @@ View(data_Millien)
 data_Ginsberg <- read_excel("~/school/BIOL4000/raw data/02_Ginsberg_2021_data/02_Ginsberg_2021_compiled.xlsx")
 View(data_Ginsberg)
 
+data_Anderson <- read_excel("~/school/BIOL4000/raw data/03_Anderson_2006_data/03_Anderson_2006_compiled.xlsx")
+View(data_Anderson)
 
 
 # add shannon diversity index
@@ -34,7 +36,15 @@ spp_H_Ginsberg
 data_Ginsberg <- cbind(data_Ginsberg, spp_H = spp_H_Ginsberg)
 View(data_Ginsberg)
 
+# Anderson et al. (2006)
+spp_matrix_Anderson <- select(data_Anderson, 4:7)
+View(spp_matrix_Anderson)
 
+spp_H_Anderson <- diversity(spp_matrix_Anderson)
+spp_H_Anderson
+
+data_Anderson <- cbind(data_Anderson, spp_H = spp_H_Anderson)
+View(data_Anderson)
 
 # logistic regression of tick infection prevalence ~ small mammal richness 
 
@@ -51,6 +61,13 @@ summary(lr_Ginsberg_rich) # beta = -0.2162, SE = 0.6566
 
 exp(-0.2162) # OR = 0.8055742
 
+# Anderson et al. (2006)
+lr_Anderson_rich <- glm(formula = prev_pool ~ spp_rich, family = "binomial", data = data_Anderson)
+summary(lr_Anderson_rich) # beta = 0.3063, SE = 1.3178
+
+exp(0.3063) # OR = 1.35839
+
+
 
 # logistic regression of tick infection prevalence ~ small mammal Shannon H
 
@@ -66,3 +83,9 @@ lr_Ginsberg_H <- glm(formula = prev_quest ~ spp_H, family = "binomial", data = d
 summary(lr_Ginsberg_H) # beta = -1.055, SE = 3.016
 
 exp(-1.055) # OR = 0.3481924
+
+# Anderson et al. (2006)
+lr_Anderson_H <- glm(formula = prev_pool ~ spp_H, family = "binomial", data = data_Anderson) 
+summary(lr_Anderson_H) # beta = -0.1278, SE = 5.9300 
+
+exp(-0.1278) # OR = 0.8800294
