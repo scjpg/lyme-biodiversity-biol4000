@@ -9,6 +9,8 @@ esc_chisq(chisq = 9.37, # richness
           totaln = 37,   # sample size of sites        
           es.type = "cox.or") # OR = 6.8328, SE = 0.6281
 
+1/6.8328 # adjusted OR = 0.1463529 (accounting for negative relationship)
+
 
 esc_chisq(chisq = 2.1, # shannon H
           totaln = 37,   # sample size of sites        
