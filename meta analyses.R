@@ -94,6 +94,70 @@ forest(meta_onlyH,
        leftlabs = c("Author (Year)", "OR", "SE"))
 
 # meta without site proxy
+studies_rich_nosite <- subset(studies_rich, biodiversity_metric == "richness" | biodiversity_metric == "shannon H")
+View(studies_rich_nosite)
 
+meta_rich_nosite <- metagen(TE = OR,
+                      seTE = SE,
+                      studlab = source,
+                      data = studies_rich_nosite,
+                      sm = "OR",
+                      fixed = FALSE,
+                      random = TRUE,
+                      method.tau = "PM",
+                      hakn = TRUE)
 
-# meta without small mammal prevalence outcome 
+summary(meta_rich_nosite)
+
+forest(meta_rich_nosite, 
+       sortvar = TE,
+       prediction = TRUE, 
+       print.tau2 = FALSE,
+       leftlabs = c("Author (Year)", "OR", "SE"))
+
+# meta regression w/ scale as covariate
+
+metareg_scale <- metareg(meta_rich_nosite, ~ samp_ha)
+summary(metareg_scale)
+
+bubble(metareg_scale, 
+       studlab = TRUE,
+       min.cex = 0.8,
+       cex.studlab = 0.6,
+       pos.studlab = 4,
+       offset = 1,
+       xlab = "Total Sample Site Area (ha)")
+
+# meta regression w/o LoGiudice et al. (site area estimated)
+
+studies_rich_nosite_noLoGiudice <- subset(studies_rich_nosite, source != "LoGiudice et al. (2008)") 
+View(studies_rich_nosite_noLoGiudice)
+
+meta_rich_nosite_noLoGiudice <- metagen(TE = OR,
+                            seTE = SE,
+                            studlab = source,
+                            data = studies_rich_nosite_noLoGiudice,
+                            sm = "OR",
+                            fixed = FALSE,
+                            random = TRUE,
+                            method.tau = "PM",
+                            hakn = TRUE)
+
+summary(meta_rich_nosite_noLoGiudice)
+
+forest(meta_rich_nosite_noLoGiudice, 
+       sortvar = TE,
+       prediction = TRUE, 
+       print.tau2 = FALSE,
+       leftlabs = c("Author (Year)", "OR", "SE"))
+
+metareg_noLoGiudice_scale <- metareg(meta_rich_nosite_noLoGiudice, ~ samp_ha)
+summary(metareg_noLoGiudice_scale)
+
+bubble(metareg_noLoGiudice_scale, 
+       studlab = TRUE,
+       min.cex = 0.8,
+       cex.studlab = 0.6,
+       pos.studlab = 2,
+       offset = 1,
+       xlab = "Total Sample Site Area (ha)")
