@@ -106,12 +106,12 @@ meta_rich_nosite <- metagen(TE = lnOR,
                       studlab = source,
                       data = studies_rich_nosite,
                       sm = "OR",
-                      fixed = TRUE,
+                      fixed = FALSE,
                       random = TRUE,
                       method.tau = "PM",
                       hakn = TRUE)
 
-summary(meta_rich_nosite) # weirdly no between study heterogeneity???
+summary(meta_rich_nosite) 
 
 forest(meta_rich_nosite, 
        sortvar = TE,

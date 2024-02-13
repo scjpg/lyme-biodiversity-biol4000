@@ -54,7 +54,6 @@ summary(lr_Millien_rich) # beta = 0.2600, SE = 0.5449, p = 0.633
 
 exp(0.26) # OR = 1.29693
 
-log(1.29693) # OR = 0.2599999
 
 # Ginsberg et al. (2021)
 lr_Ginsberg_rich <- glm(formula = prev_quest ~ spp_rich, family = "binomial", data = data_Ginsberg)
@@ -62,7 +61,6 @@ summary(lr_Ginsberg_rich) # beta = -0.2162, SE = 0.6566, p = 0.742
 
 exp(-0.2162) # OR = 0.8055742
 
-log(0.8055742) # OR = 0.2599999
 
 # Anderson et al. (2006)
 lr_Anderson_rich <- glm(formula = prev_pool ~ spp_rich, family = "binomial", data = data_Anderson)
@@ -70,7 +68,6 @@ summary(lr_Anderson_rich) # beta = 0.3063, SE = 1.3178, p = 0.816
 
 exp(0.3063) # OR = 1.35839
 
-log(1.35839) # OR = 0.3063002
 
 
 # logistic regression of tick infection prevalence ~ small mammal Shannon H
@@ -81,7 +78,6 @@ summary(lr_Millien_H) # beta = 1.530, SE = 2.221, p = 0.4909
 
 exp(1.530) # OR = 4.618177
 
-log(4.618177) # OR = 1.53
 
 # Ginsberg et al. (2021)
 lr_Ginsberg_H <- glm(formula = prev_quest ~ spp_H, family = "binomial", data = data_Ginsberg)
@@ -89,12 +85,9 @@ summary(lr_Ginsberg_H) # beta = -1.055, SE = 3.016, p = 0.726
 
 exp(-1.055) # OR = 0.3481924
 
-log(0.3481924) # OR = -1.055
 
 # Anderson et al. (2006)
 lr_Anderson_H <- glm(formula = prev_pool ~ spp_H, family = "binomial", data = data_Anderson) 
 summary(lr_Anderson_H) # beta = -0.1278, SE = 5.9300, p = 0.983
 
 exp(-0.1278) # OR = 0.8800294
-
-log(0.8800294) # OR = -0.1278
