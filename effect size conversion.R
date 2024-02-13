@@ -7,20 +7,20 @@ library(esc)
 
 esc_chisq(chisq = 9.37, # richness
           totaln = 37,   # sample size of sites        
-          es.type = "cox.or") # OR = 6.8328, SE = 0.6281
+          es.type = "logit") # OR = 2.1125, SE =  0.6901
 
-1/6.8328 # adjusted OR = 0.1463529 (accounting for negative relationship)
+1/2.1125 # adjusted OR = 0.4733728 (accounting for negative relationship)
 
 
 esc_chisq(chisq = 2.1, # shannon H
           totaln = 37,   # sample size of sites        
-          es.type = "cox.or") # OR = 2.2468, SE = 0.5588
+          es.type = "logit") # OR = 0.8898, SE = 0.6141
 
 # Prusinski et al. (2006)
 esc_rpb(r = -0.08,      
         grp1n = 12,   # sample size of sites for small mammals      
         grp2n = 12, # sample size of sites for small mammals
-        es.type = "cox.or") # OR =  0.7673, SE = 0.6750
+        es.type = "logit") # OR =  -0.2911, SE = 0.7417
 
 
 # States et al. (2014) *interaction coefficient* 
@@ -39,4 +39,4 @@ sqrt(0.43) # r = -0.6557439, negative because negative relationship
 esc_rpb(r = -0.6557439,      
         grp1n = 14,   # sample size of sites for small mammals      
         grp2n = 14, # sample size of sites for ticks
-        es.type = "cox.or") # OR = 0.0569, SE = 0.7322
+        es.type = "logit") # OR = -3.1508, SE = 0.8045
