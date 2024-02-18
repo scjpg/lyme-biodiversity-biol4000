@@ -120,22 +120,7 @@ forest(meta_rich_nosite,
        leftlabs = c("Author (Year)", "OR", "SE"),
        xlab = "Log Odds Ratio")
 
-# meta regression w/ scale as covariate
-
-metareg_scale <- metareg(meta_rich_nosite, ~ samp_ha)
-summary(metareg_scale)
-
-bubble(metareg_scale, 
-       studlab = TRUE,
-       min.cex = 0.8,
-       cex.studlab = 0.6,
-       pos.studlab = 4,
-       offset = 1,
-       xlab = "Total Sample Site Area (ha)",
-       ylab = "Log Odds Ratio")
-
-# meta regression w/o LoGiudice et al. (site area estimated)
-
+# meta regression w/o LoGiudice et al. (no sampling area data)
 studies_rich_nosite_noLoGiudice <- subset(studies_rich_nosite, source != "LoGiudice et al. (2008)") 
 View(studies_rich_nosite_noLoGiudice)
 
