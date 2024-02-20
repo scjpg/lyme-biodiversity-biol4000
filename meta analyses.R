@@ -27,6 +27,25 @@ forest(meta_rich,
        leftlabs = c("Author (Year)", "OR", "SE"),
        xlab = "Log Odds Ratio")
 
+# funnel plot tests 
+col.contour = c("gray70", "gray85", "gray95")
+
+funnel(meta_rich,
+       studlab = TRUE,
+       contour = c(0.9, 0.95, 0.99),
+       col.contour = col.contour,
+       pos.studlab = 4,
+       xlab = "Log Odds Ratio",
+       cex.studlab = 0.6)
+
+legend(x = 0.05, y = 0.05, 
+       legend = c("p < 0.1", "p < 0.05", "p < 0.01"),
+       fill = col.contour)
+
+metabias(meta_rich, 
+         method.bias = "thompson", 
+         k.min = 8)
+
 # meta using shannon H predictor for studies analyzed independently
 studies_H <- subset(all_studies, meta2 == "1")
 View(studies_H)
