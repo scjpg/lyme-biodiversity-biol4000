@@ -232,12 +232,18 @@ metareg_df <- data.frame(meta_rich_nosite_noLoGiudice)
 
 metareg_df <- cbind(metareg_df, samp_ha = studies_rich_nosite_noLoGiudice$samp_ha)
 
+
+colourblind_pal <- c("#0072B2", "#CC79A7", "#009E73", 
+                     "#F0E442", "#E69F00", "#56B4E9", "#000000")
+
 ggplot(metareg_df, aes(x = samp_ha, y = TE, size = w.random, colour = studlab, fill = studlab)) +
   scale_x_continuous(limits = c(5, 55), breaks = c(10, 20, 30, 40, 50)) +
   scale_y_continuous(limits = c(-1.8, 1.6), breaks = seq(-2, 1.6, 0.4)) +
   geom_errorbar(aes(x = samp_ha, y = TE, ymin = lower, ymax = upper), size = 1) +
   geom_point(shape = 21, stroke = 1.5, alpha = 0.5) +
   scale_size(range = c(5, 13)) +
+  scale_fill_manual(values = colourblind_pal) +
+  scale_colour_manual(values = colourblind_pal) +
   geom_abline(intercept = coef(metareg_noLoGiudice_scale)[1], slope = coef(metareg_noLoGiudice_scale)[2]) +
   geom_hline(yintercept = 0, colour = "red") +
   labs(x = "\nTotal Sample Site Area (ha)", y = "Log Odds Ratio\n") +

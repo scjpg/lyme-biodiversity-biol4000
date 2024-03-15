@@ -1,4 +1,5 @@
 library(ggplot2)
+library(ggpubr)
 library(readxl)
 
 sys_df <- read_excel("~/school/BIOL4000/systematic review.xlsx", sheet = "systematic data")
@@ -47,3 +48,68 @@ ggplot(sys_df, aes(x = year, y = y, colour = relationship, shape = proxy_sim)) +
   scale_x_continuous(limits = c(1993, 2023), breaks = c(1993, 1998, 2003, 2008, 2013, 2018, 2023)) +
   labs(x = "\nPublication Year", y = "Number of Seperate Analyses\n") +
   theme_light() 
+
+
+
+# propotional bar plots
+
+colourblind_pal <- c("#0072B2", "#E69F00", "#009E73", "#D55E00", 
+                     "#CC79A7", "#F0E442", "#56B4E9", "#000000")
+
+# proxy
+proxy_df <- subset(sys_df, proxy_sim == "biodiversity proxy")
+
+proxy_plot <- ggplot(proxy_df) +
+  geom_bar(aes(year, fill = relationship)) +
+  scale_x_continuous(limits = c(1994, 2024), breaks = seq(1995, 2024, 2)) +
+  scale_y_continuous(limits = c(0, 5), breaks = c(0, 1, 2, 3, 4, 5)) +
+  scale_fill_manual(values = colourblind_pal,
+                    name = "Relationship",
+                    labels = c("Amplification", "Dilution", "None")) +
+  labs(title = "a) Studies Using a Biodiversity Site Proxy (n = 9)\n", x = " ", y = "\n") +
+  theme_bw() +
+  theme(axis.line = element_line(color='black'),
+        plot.background = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank())
+
+# simulation
+sim_df <- subset(sys_df, proxy_sim == "simulation")
+
+sim_plot <- ggplot(sim_df) +
+  geom_bar(aes(year, fill = relationship)) +
+  scale_x_continuous(limits = c(1994, 2024), breaks = seq(1995, 2024, 2)) +
+  scale_y_continuous(limits = c(0, 5), breaks = c(0, 1, 2, 3, 4, 5)) +
+  scale_fill_manual(values = colourblind_pal,
+                    name = "Relationship",
+                    labels = c("Amplification", "Dilution", "None")) +
+  labs(title = "b) Studies Using Simulations (n = 10)\n", x = " ", y = "Number of Analyses\n") +
+  theme_bw() +
+  theme(axis.line = element_line(color='black'),
+        plot.background = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank())
+
+# none
+direct_df <- subset(sys_df, proxy_sim == "none")
+
+direct_plot <- ggplot(direct_df) +
+  geom_bar(aes(year, fill = relationship)) +
+  scale_x_continuous(limits = c(1994, 2024), breaks = seq(1995, 2024, 2)) +
+  scale_y_continuous(limits = c(0, 5), breaks = c(0, 1, 2, 3, 4, 5)) +
+  scale_fill_manual(values = colourblind_pal,
+                    name = "Relationship",
+                    labels = c("Amplification", "Dilution", "None")) +
+  labs(title = "c) Studies Not Using Biodiversity Site Proxies or Simulations (n = 11)\n", x = "\nPublication Year", y = "\n") +
+  theme_bw() +
+  theme(axis.line = element_line(color='black'),
+        plot.background = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank())
+
+# combine plots
+
+fig <- ggarrange(proxy_plot, sim_plot, direct_plot,
+                 ncol = 1, nrow = 3,
+                 common.legend = TRUE, legend = "right")
+fig
